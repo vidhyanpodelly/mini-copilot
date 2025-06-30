@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini Copilot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: url("{{ url_for('static', filename='bg.jpg') }}") no-repeat center center fixed;
+      background-size: cover;
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 24px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #0fffc1, #3eecff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .highlight {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 0.4rem 0.6rem;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #0fffc1;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 1rem;
+      border-radius: 16px;
+      border: none;
+      font-size: 1rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      resize: vertical;
+      margin-top: 1rem;
+      font-family: inherit;
+    }
+
+    textarea::placeholder {
+      color: #aaa;
+    }
+
+    input[type="submit"] {
+      margin-top: 1rem;
+      background: linear-gradient(90deg, #0fffc1, #3eecff);
+      border: none;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 16px;
+      cursor: pointer;
+      color: #000;
+      transition: all 0.2s ease;
+    }
+
+    input[type="submit"]:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+    }
+
+    h3 {
+      margin-top: 2rem;
+      font-size: 1.3rem;
+      color: #0fffc1;
+    }
+
+    .ai-response {
+      background: rgba(255, 255, 255, 0.1);
+      color: #f2f2f2;
+      border-radius: 16px;
+      padding: 1rem;
+      margin-top: 1rem;
+      white-space: pre-wrap;
+      box-shadow: inset 0 0 8px rgba(0, 255, 255, 0.1);
+    }
+
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🚀 Mini Copilot</h2>
+    <p><span class="highlight">Ask for code, explanation, or docstring…</span></p>
+    <form action="/" method="POST">
+      <textarea name="prompt" placeholder="e.g. Write a Python function for factorial, or explain a loop..."></textarea>
+      <input type="submit" value="Get Help">
+    </form>
+
+    {% if result %}
+      <h3>AI Response</h3>
+      <div class="ai-response">{{ result }}</div>
+    {% endif %}
+  </div>
+</body>
+</html>
